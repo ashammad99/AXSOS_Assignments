@@ -1,0 +1,24 @@
+h1 {
+    background-color: black;
+    color: aqua;
+    font-weight: bolder;
+}
+
+h1>span {
+    color: white;
+}
+
+h2 {
+    text-align: center;
+    color: white;
+    background-color: purple;
+    font-weight: lighter;
+}
+
+h3 {
+    text-align: right;
+    color: black;
+    background-color: rgb(95, 188, 211);
+    font-weight: lighter;
+    text-decoration: underline;
+}
