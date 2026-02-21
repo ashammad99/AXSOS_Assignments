@@ -1,0 +1,36 @@
+body {
+    margin: 50px;
+}
+
+button {
+    display: block;
+    margin-top: 15px;
+}
+
+.search-btn {
+    color: #45c77f;
+    background-color: aliceblue;
+    padding: 5px 40px;
+    font-weight: bold;
+    border: 2px solid #80cea3;
+    border-radius: 15px;
+}
+
+.add-btn {
+    color: white;
+    font-size: larger;
+    background-color: #26e6cc;
+    border: 2px solid #45c77f;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.create-btn {
+    color: white;
+    background-color: rgb(78, 78, 212);
+    padding: 5px 40px;
+    border: 2px solid black;
+    font-size: 15px;
+    box-shadow: 4px 4px 0px #000000;
+}
