@@ -12,7 +12,7 @@ button {
     background-color: aliceblue;
     padding: 5px 40px;
     font-weight: bold;
-    border: 2px solid #80cea3;
+    border: 2px solid #53b6b7;
     border-radius: 15px;
 }
 
@@ -20,7 +20,7 @@ button {
     color: white;
     font-size: larger;
     background-color: #26e6cc;
-    border: 2px solid #45c77f;
+    border: none;
     width: 35px;
     height: 35px;
     border-radius: 50%;
