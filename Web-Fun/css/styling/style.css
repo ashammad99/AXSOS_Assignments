@@ -1,10 +1,15 @@
+
+body {
+	margin: 25px;
+}
 h1 {
     background-color: black;
     color: aqua;
     font-weight: bolder;
+    padding: 7px;
 }
 
-h1>span {
+span {
     color: white;
 }
 
@@ -13,6 +18,7 @@ h2 {
     color: white;
     background-color: purple;
     font-weight: lighter;
+    padding: 10px;
 }
 
 h3 {
@@ -21,4 +27,5 @@ h3 {
     background-color: rgb(95, 188, 211);
     font-weight: lighter;
     text-decoration: underline;
+    padding: 10px;
 }
