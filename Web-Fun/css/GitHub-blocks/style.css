@@ -1,0 +1,38 @@
+.container {
+    width: 500px;
+
+
+}
+
+h1 {
+    color: #424b6b;
+    text-align: center;
+}
+
+.section {
+    height: 150px;
+    width: 500px;
+    display: flex;
+    margin-top: 15px;
+    padding: 15px;
+
+}
+
+.section1 {
+    background-color: #5ecad1;
+    justify-content: space-between;
+}
+
+.section2 {
+    background-color: #d6b2c3;
+    justify-content: space-evenly;
+}
+
+.section3 {
+    background-color: #8b4b4b;
+     justify-content: space-around;
+}
+
+p {
+    text-align: center;
+}
