@@ -1,7 +1,10 @@
 .container {
-    width: 500px;
-
-
+    width: 750px;
+    background-color: #f3f3ff;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1 {
@@ -10,12 +13,11 @@ h1 {
 }
 
 .section {
+    width: 90%;
     height: 150px;
-    width: 500px;
     display: flex;
     margin-top: 15px;
     padding: 15px;
-
 }
 
 .section1 {
@@ -29,8 +31,8 @@ h1 {
 }
 
 .section3 {
-    background-color: #8b4b4b;
-     justify-content: space-around;
+    background-color: #fcfcff;
+    justify-content: space-around;
 }
 
 p {
