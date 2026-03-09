@@ -2,55 +2,126 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <nav>
-        <div class="container">
-            <h1 class="nav-title">Profile</h1>
-            <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#" class="active">My Profile</a></li>
-                <li><a href="#">Find Connections</a></li>
-                <li><button class="btn">Sign Out</button></li>
-            </ul>
+  <nav>
+    <div class="container">
+      <h1 class="nav-title">Profile</h1>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#" class="active">My Profile</a></li>
+        <li><a href="#">Find Connections</a></li>
+        <li><button class="btn">Sign Out</button></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container main">
+    <div class="left">
+
+      <div class="user-card">
+        <div class="card-head"></div>
+        <div class="profile-icon"><img src="./assets/icons/user-circle.png" alt=""></div>
+        <div class="user-info">
+          <h3>Ahmed Hammad</h3>
+          <p><img src="./assets/icons/map-marker.png" alt="Map Marker icon">Seattle</p>
+          <p>Developer | Engineer | Problem Solver <br>Master of shadows and Internet</p>
+          <p><img src="./assets/icons/gear.png" alt="edit profile icon"><a href="">edit profile</a></p>
         </div>
-    </nav>
-    <div class="container main">
-        <div class="left">
-
-            <div class="user-card">
-                <div class="card-head"></div>
-                <div class="profile-icon"><img src="./assets/icons/user-circle.png" alt=""></div>
-                <div class="user-info">
-                    <h3>Ahmed Hammad</h3>
-                    <p><img src="./assets/icons/map-marker.png" alt="Map Marker icon">Seattle</p>
-                    <p>Developer | Engineer | Problem Solver <br>Master of shadows and Internet</p>
-                    <p><img src="./assets/icons/gear.png" alt="edit profile icon"><a href="">edit profile</a></p>
-                </div>
-            </div>
-            <div class="education">
-
-                <div class="edu-head">
-                    <p>Education</p>
-                </div>
-                <div class="edu-info">
-
-                </div>
-            </div>
+      </div>
+      <div class="education">
+        <div class="edu-head">
+          <p class="edu-content">Education</p>
         </div>
-        <div class="right">
-            <div class="connection-requests">
-                <div class="request-head">
-                    <p> <span class="no-of-requsts">2</span>Connection Requsts</p>
-                </div>
-            </div>
-        </div>
+        <div class="edu-content">
 
+          <h3>Coding Dojo - Full-stack bootcamp</h3>
+
+          <h4>Dec 2019 - Mar 2020</h4>
+
+          <p>Triple Black belt in Python, MERN and C#...</p>
+
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="connection-request">
+        <div class="requests-head">
+          <div class="requests">
+            <span class="badge">2</span>
+            <span class="text">Connections Requests</span>
+          </div>
+        </div>
+        <div class="requests-content">
+          <div class="request-row">
+            <div class="username">
+              <img src="./assets/icons/user-circle.png" alt="User Icon" />
+              <span>Todd E</span>
+            </div>
+            <div>
+              <img src="./assets/icons/accept-circle.png" alt="" />
+              <img src="./assets/icons/close-circle.png" alt="" />
+            </div>
+          </div>
+          <div class="request-row">
+            <div class="username">
+              <img src="./assets/icons/user-circle.png" alt="User Icon" />
+              <span>Phil K</span>
+            </div>
+            <div class="username">
+              <img src="./assets/icons/accept-circle.png" alt="" />
+              <img src="./assets/icons/close-circle.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="your-connections">
+        <div class="requests-head">
+          <div class="connections">
+            <span class="badge">500+</span>
+            <span class="text">Your Connections</span>
+          </div>
+        </div>
+        <div>
+          <div class="requests-content">
+            <div class="request-row">
+              <div class="username">
+                <img src="./assets/icons/user-circle.png" alt="User Icon" />
+                <span>Adrian D</span>
+              </div>
+            </div>
+            <div class="request-row">
+              <div class="username">
+                <img src="./assets/icons/user-circle.png" alt="User Icon" />
+                <span>Anne J</span>
+              </div>
+            </div>
+
+            <div class="request-row">
+              <div class="username">
+                <img src="./assets/icons/user-circle.png" alt="User Icon" />
+                <span>Todd E</span>
+              </div>
+            </div>
+
+            <div class="request-row">
+              <div class="username">
+                <img src="./assets/icons/user-circle.png" alt="User Icon" />
+                <span>Arry Y</span>
+              </div>
+            </div>
+          </div>
+          <div class="requests-footer">
+            <a href="">View More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
