@@ -1,0 +1,26 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.card {
+    margin-top: 20px;
+    margin-left: 50px;
+    border: 2px solid black;
+    width: 25%;
+    padding: 10px;
+}
+
+.row-1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 15px;
+}
+
+.row-1 button {
+    background: #fed966;
+    padding: 3px 8px;
+    box-shadow: 2px 3px black;
+}
