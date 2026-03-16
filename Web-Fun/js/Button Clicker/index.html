@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojonary</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+
+            <h1>Dojonary</h1>
+
+            <input type="text" class="search" size="30" placeholder="Search" name="" id=""></li>
+            <button class="btn-login" onclick="loginButton(this)">Login</button>
+        </nav>
+    </div>
+    <div class="container main">
+        <div class="left">
+            <div class="card">
+                <div class="col-1">
+                    <h1>ninja</h1>
+                    <span>noun</span>
+                    <p>Plural: <em>ninjas</em></p>
+                    <button onclick="alertClick()">13 Likes</button>
+                </div>
+                <div class="col-2">
+                    <p>A Practitioner skilled in <a href="">Japaneses</a> art of <a href="">ninjutsu</a></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="col-1">
+                    <h1>ninja</h1>
+                    <span>noun</span>
+                    <p>Plural: <em>ninjas</em></p>
+                    <button onclick="alertClick()">37 Likes</button>
+                </div>
+                <div class="col-2">
+                    <p>A <a href="">Programmer</a> who breaks down problems with <a href="">zen</a>-like focus</p>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="your-defination">
+                    <p>Dojonary is defined by <b>You</b></p>
+                    <button onclick="remove(this)">Add Defination</button>
+            </div>
+        </div>
+
+    </div>
+</body>
+    <script src="./app.js" defer async></script>
+</html>

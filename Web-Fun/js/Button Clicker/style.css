@@ -1,0 +1,116 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+
+.container {
+    width: 60%;
+    margin: auto;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #cccccc;
+    padding: 20px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+
+}
+
+.btn-login {
+    color: #fff;
+    background-color: #17a2b8;
+    padding: 4px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: black;
+    box-shadow: 3px 3px 0px black;
+}
+
+.search {
+    padding: 3px;
+    border: 3px solid black;
+
+}
+
+.main {
+    display: flex;
+    margin-top: 40px;
+    gap: 20px;
+    height: 100px;
+    flex: 1
+}
+
+.main .left {
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.main .right {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card {
+    height: 250px;
+    display: flex;
+    align-items: center;
+    padding: 7px;
+    border: 2px solid black;
+}
+
+.col-1 {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    align-items: center;
+    gap: 4px;
+}
+
+.col-1 .dictionary {
+    align-items: center;
+    margin: auto;
+}
+
+.col-1 button {
+    background: #fed966;
+    padding: 3px 8px;
+    margin-top: 10px;
+    box-shadow: 2px 3px black;
+}
+
+.col-2 {
+    flex: 2;
+}
+
+.your-defination {
+    padding: 7px;
+    border: 2px solid black;
+    text-align: center;
+
+}
+
+.your-defination p {
+    font-size: 20px;
+}
+
+.your-defination button {
+    background: #92c47d;
+    width: 80%;
+    padding: 5px 15px;
+    margin-top: 10px;
+    box-shadow: 2px 3px black;
+}
