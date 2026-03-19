@@ -1,8 +1,11 @@
-// function play(element) {
-//     element.play;
+function playVideo(element) {
+    element.play();
+}
 
-// }
+function pauseVideo(element) {
+    element.pause();
+}
 
-// function pause(element) {
-//     element.pause;
-// }
+var vid = document.querySelector("video").addEventListener() {
+    
+}

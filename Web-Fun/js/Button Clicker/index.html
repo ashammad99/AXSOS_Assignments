@@ -11,11 +11,13 @@
 <body>
     <div class="container">
         <nav>
+            <h1 class="nav-title">Dojonary</h1>
 
-            <h1>Dojonary</h1>
+            <div class="nav-center">
+                <input type="text" class="search" placeholder="Search">
+            </div>
 
-            <input type="text" class="search" size="30" placeholder="Search" name="" id=""></li>
-            <button class="btn-login" onclick="loginButton(this)">Login</button>
+            <button class="btn-login">Login</button>
         </nav>
     </div>
     <div class="container main">
@@ -45,12 +47,13 @@
         </div>
         <div class="right">
             <div class="your-defination">
-                    <p>Dojonary is defined by <b>You</b></p>
-                    <button onclick="remove(this)">Add Defination</button>
+                <p>Dojonary is defined by <b>You</b></p>
+                <button onclick="remove(this)">Add Defination</button>
             </div>
         </div>
 
     </div>
 </body>
-    <script src="./app.js" defer async></script>
+<script src="./app.js" defer async></script>
+
 </html>

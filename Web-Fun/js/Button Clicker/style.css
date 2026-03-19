@@ -6,16 +6,45 @@
 
 
 .container {
-    width: 60%;
+    width: 85%;
+    max-width: 800px;
     margin: auto;
 }
 
 nav {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background-color: #cccccc;
+    justify-content: space-between;
+    background-color: #ccc;
     padding: 20px;
+    gap: 20px;
+}
+
+/* العنوان */
+.nav-title {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.nav-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px;
+    border: 3px solid black;
+}
+
+.btn-login {
+    padding: 6px 12px;
+    background-color: #17a2b8;
+    color: white;
+    border: 3px solid black;
+    box-shadow: 3px 3px black;
 }
 
 nav ul {
@@ -25,28 +54,15 @@ nav ul {
 
 }
 
-.btn-login {
-    color: #fff;
-    background-color: #17a2b8;
-    padding: 4px;
-    border-width: 3px;
-    border-style: solid;
-    border-color: black;
-    box-shadow: 3px 3px 0px black;
-}
 
-.search {
-    padding: 3px;
-    border: 3px solid black;
-
-}
 
 .main {
     display: flex;
     margin-top: 40px;
     gap: 20px;
     height: 100px;
-    flex: 1
+    flex: 1;
+    flex-wrap: wrap;
 }
 
 .main .left {
@@ -70,6 +86,8 @@ nav ul {
     align-items: center;
     padding: 7px;
     border: 2px solid black;
+    min-height: 200px;
+    flex-wrap: wrap;
 }
 
 .col-1 {
@@ -77,7 +95,7 @@ nav ul {
     flex-direction: column;
     flex: 2;
     align-items: center;
-    gap: 4px;
+    gap: 5px;
 }
 
 .col-1 .dictionary {
