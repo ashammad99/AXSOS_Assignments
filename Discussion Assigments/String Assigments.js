@@ -1,4 +1,3 @@
-
 //1. Reverse String
 function reverseString(str) {
     let reveseStr = "";
@@ -12,10 +11,11 @@ console.log(reverseString("hello"));
 //2- count Vowels - without using built in functions
 function countVowles(str) {
     let count = 0;
+    let x = str.toLowerCase();
     let vowelsArr = ["a", "e", "i", "o", "u"];
     for (var i = 0; i < vowelsArr.length; i++) {
-        for (var j = 0; j < str.length; j++) {
-            if (vowelsArr[i] == str[j]) {
+        for (var j = 0; j < x.length; j++) {
+            if (vowelsArr[i] == x[j]) {
                 count++
             }
         }
@@ -24,13 +24,33 @@ function countVowles(str) {
 }
 console.log(countVowles("aeiou"));
 console.log(countVowles("ahmed"));
-//3. Check Palindrome
+//
+function countVowles2(str) {
+    let count = 0;
+    let vowelsList = "aeiouAEIOU";
+    for (var i = 0; i < str.length; i++ ) {
+        if(str.includes(vowelsList)) {
+            count++;
+        }
+    }
+    return count;
+}
+console.log(countVowles2("aeiouAEIOU"));
+
+//3. Check Palindrome without using built-in functions
 function checkPalindrom(str) {
-    return str == str.split('').reverse().join('');
+    return str == reverseString(str);
 }
 console.log(checkPalindrom("lool"));
 console.log(checkPalindrom("ahmed"));
-console.log(checkPalindrom("madam"));
+
+//3. Check Palindrome
+function checkPalindrom2(str) {
+    return str == str.split('').reverse().join('');
+}
+console.log(checkPalindrom2("lool"));
+console.log(checkPalindrom2("ahmed"));
+console.log(checkPalindrom2("madam"));
 
 //4. Longest Word in a Sentence
 function LongestWord(sentance) {
@@ -48,7 +68,6 @@ console.log(LongestWord("I love solving algorithms"));
 
 
 //Switch 
-
 function convertLetter(character) {
     switch (character) {
         case "A":
@@ -69,13 +88,9 @@ function convertLetter(character) {
 console.log(convertLetter("A"));
 console.log(convertLetter("G"));
 
-
-
 //Count characters
-
 function countCharacterTypes(str) {
     let countObject = { vowels: 0, digits: 0, spaces: 0, others: 0 };
-
     for (let i = 0; i < str.length; i++) {
         let char = str[i];
 
