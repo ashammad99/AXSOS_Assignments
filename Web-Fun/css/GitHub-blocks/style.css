@@ -28,7 +28,7 @@ h1 {
 .section2 {
     background-color: #d6b2c3;
     justify-content: space-evenly;
-    flex:;
+    flex:1;
 }
 
 .section3 {
