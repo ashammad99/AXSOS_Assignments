@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Boxes</title>
+</head>
+<style>
+    * {
+    margin:0;
+    padding:0;
+    }
+    .container {
+        margin: 50px auto;
+        text-align: center;
+    }
+    .boxes {
+    margin: 30px auto;
+ width: 80%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    .box {
+    background-color: {{color}};
+    width: 250px;
+    height: 250px;
+    }
+</style>
+<body>
+<div class="container">
+    <h1>Welcome</h1>
+    <div class="boxes">
+        {% for i in range(0, x) %}
+        <div class="box"></div>
+        {% endfor %}
+
+    </div>
+</div>
+
+</body>
+</html>
