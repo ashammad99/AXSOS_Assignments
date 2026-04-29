@@ -1,0 +1,22 @@
+.container {
+    width: fit-content;
+    margin: 50px auto;
+    border: 1px solid gray;
+}
+
+.row {
+    display: flex;
+}
+
+.box {
+    width: 50px;
+    height: 50px;
+}
+
+.white {
+    background-color: #eee;
+}
+
+.black {
+    background-color: #333;
+}
