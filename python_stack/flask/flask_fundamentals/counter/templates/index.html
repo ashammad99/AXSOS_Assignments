@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Counter</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+      .container {
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        flex-direction: column;
+        gap:15px;
+      }
+    </style>
+</head>
+<body>
+<div class="container">
+           <h2>Visits: {{ visits }}</h2>
+        <h1>Counter: {{ counter }}</h1>
+    <p>{{counter}} <span> times</span></p>
+    <a href="/increment">
+        <button>+1</button>
+    </a>
+    <a href="/double">
+        <button>+2</button>
+    </a>
+    <a href="/reset">
+        <button>Reset</button>
+    </a>
+    <a href="/destroy_session">
+        <button>Destroy Session</button>
+    </a>
+        <form action="/increment_custom" method="POST">
+            <input type="number" name="amount" placeholder="Enter number">
+            <button type="submit">Add</button>
+        </form>
+</div>
+</body>
+</html>
