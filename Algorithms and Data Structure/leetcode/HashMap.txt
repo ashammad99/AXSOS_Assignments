@@ -1,0 +1,88 @@
+class MyHashMap:
+    """
+    A hash map implementation using separate chaining to handle collisions.
+
+    Uses a fixed-size array of buckets, where each bucket holds a list of
+    (key, value) pairs. Keys and values are non-negative integers.
+
+    Attributes:
+        size (int): Number of buckets in the hash table.
+        buckets (list[list]): Array of buckets, each a list of [key, value] pairs.
+
+    Example:
+        >>> m = MyHashMap()
+        >>> m.put(1, 10)
+        >>> m.put(2, 20)
+        >>> m.get(1)   # 10
+        >>> m.get(3)   # -1
+        >>> m.put(2, 30)
+        >>> m.get(2)   # 30
+        >>> m.remove(2)
+        >>> m.get(2)   # -1
+    """
+
+    def __init__(self):
+        """
+        Initialize the hash map with a fixed number of empty buckets.
+        """
+        self.size = 1000
+        self.buckets = [[] for _ in range(self.size)]
+
+    def _hash(self, key: int) -> int:
+        """
+        Compute the bucket index for a given key.
+
+        Args:
+            key (int): The key to hash.
+
+        Returns:
+            int: Index into the buckets array.
+        """
+        return key % self.size
+
+    def put(self, key: int, value: int) -> None:
+        """
+        Insert or update a key-value pair in the map.
+
+        If the key already exists, its value is overwritten.
+        Otherwise, the pair is appended to the appropriate bucket.
+
+        Args:
+            key (int): The key to insert or update.
+            value (int): The value to associate with the key.
+        """
+        index = self._hash(key)
+        for pair in self.buckets[index]:
+            if pair[0] == key:
+                pair[1] = value  # Key exists — update value in place
+                return
+        self.buckets[index].append([key, value])  # New key — append to bucket
+
+    def get(self, key: int) -> int:
+        """
+        Retrieve the value associated with a key.
+
+        Args:
+            key (int): The key to look up.
+
+        Returns:
+            int: The associated value, or -1 if the key does not exist.
+        """
+        index = self._hash(key)
+        for pair in self.buckets[index]:
+            if pair[0] == key:
+                return pair[1]
+        return -1  # Key not found
+
+    def remove(self, key: int) -> None:
+        """
+        Delete a key-value pair from the map if the key exists.
+
+        Has no effect if the key is not present.
+
+        Args:
+            key (int): The key to remove.
+        """
+        index = self._hash(key)
+        # Rebuild the bucket excluding the target key
+        self.buckets[index] = [pair for pair in self.buckets[index] if pair[0] != key]

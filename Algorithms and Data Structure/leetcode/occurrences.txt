@@ -1,4 +1,23 @@
-#1941. Check if All Characters Have Equal Number of Occurrences
 class Solution:
     def areOccurrencesEqual(self, s: str) -> bool:
-        return len(set(s.count(c) for c in s)) == 1
+        """
+        Check whether all characters in the string appear the same number of times.
+
+        Args:
+            s (str): Input string consisting of characters.
+
+        Returns:
+            bool: True if every distinct character in the string has the same frequency,
+                  otherwise False.
+        """
+
+        # Build a generator that computes frequency of each character in the string
+        # s.count(c) counts occurrences of character c in the entire string
+        frequencies = (s.count(c) for c in s)
+
+        # Convert frequencies to a set to remove duplicates
+        # If all characters have equal frequency, the set will contain exactly one value
+        unique_frequencies = set(frequencies)
+
+        # If only one unique frequency exists, all characters occur equally often
+        return len(unique_frequencies) == 1

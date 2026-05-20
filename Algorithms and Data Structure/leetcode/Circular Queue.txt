@@ -1,0 +1,122 @@
+class MyCircularQueue:
+    """
+    A circular queue (ring buffer) implementation using a fixed-size list.
+
+    Supports O(1) enqueue, dequeue, and peek operations.
+    Uses a count variable to distinguish between full and empty states,
+    avoiding the ambiguity that arises from pointer-only tracking.
+
+    Attributes:
+        k (int): Maximum capacity of the queue.
+        data (list): Fixed-size buffer storing queue elements.
+        front (int): Index of the front element. -1 when empty.
+        rear (int): Index of the most recently inserted element. -1 when empty.
+        count (int): Number of elements currently in the queue.
+
+    Example:
+        >>> q = MyCircularQueue(3)
+        >>> q.enQueue(1)  # True
+        >>> q.enQueue(2)  # True
+        >>> q.enQueue(3)  # True
+        >>> q.enQueue(4)  # False, queue is full
+        >>> q.Rear()      # 3
+        >>> q.isFull()    # True
+        >>> q.deQueue()   # True
+        >>> q.enQueue(4)  # True
+        >>> q.Rear()      # 4
+    """
+
+    def __init__(self, k: int):
+        """
+        Initialize the circular queue with a fixed capacity.
+
+        Args:
+            k (int): The maximum number of elements the queue can hold.
+        """
+        self.k = k
+        self.data = [None] * k
+        self.front = -1
+        self.rear = -1
+        self.count = 0
+
+    def enQueue(self, value: int) -> bool:
+        """
+        Insert an element at the rear of the queue.
+
+        Args:
+            value (int): The value to insert.
+
+        Returns:
+            bool: True if the operation succeeded, False if the queue is full.
+        """
+        if self.isFull():
+            return False
+
+        self.rear = (self.rear + 1) % self.k
+        self.data[self.rear] = value
+
+        if self.front == -1:
+            self.front = 0
+
+        self.count += 1
+        return True
+
+    def deQueue(self) -> bool:
+        """
+        Remove the element at the front of the queue.
+
+        Returns:
+            bool: True if the operation succeeded, False if the queue is empty.
+        """
+        if self.isEmpty():
+            return False
+
+        self.data[self.front] = None
+
+        if self.count == 1:
+            self.front = self.rear = -1
+        else:
+            self.front = (self.front + 1) % self.k
+
+        self.count -= 1
+        return True
+
+    def Front(self) -> int:
+        """
+        Retrieve the element at the front of the queue without removing it.
+
+        Returns:
+            int: The front element, or -1 if the queue is empty.
+        """
+        if self.isEmpty():
+            return -1
+        return self.data[self.front]
+
+    def Rear(self) -> int:
+        """
+        Retrieve the element at the rear of the queue without removing it.
+
+        Returns:
+            int: The rear element, or -1 if the queue is empty.
+        """
+        if self.isEmpty():
+            return -1
+        return self.data[self.rear]
+
+    def isEmpty(self) -> bool:
+        """
+        Check whether the queue contains no elements.
+
+        Returns:
+            bool: True if the queue is empty, False otherwise.
+        """
+        return self.count == 0
+
+    def isFull(self) -> bool:
+        """
+        Check whether the queue has reached its maximum capacity.
+
+        Returns:
+            bool: True if the queue is full, False otherwise.
+        """
+        return self.count == self.k
