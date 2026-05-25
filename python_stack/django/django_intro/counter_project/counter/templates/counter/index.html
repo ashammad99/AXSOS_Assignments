@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Session Counter</title>
+</head>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+<body>
+
+ <div class="container">
+     <h1>Counter</h1>
+  <hr>
+
+  <h2>Stats</h2>
+
+  <p>Page Visits: {{ visit_count }}</p>
+  <p>Counter Value: {{ counter }}</p>
+
+  <hr>
+
+  <h2>Actions</h2>
+
+  <p>
+    <a href="{% url 'increment_by' 1 %}">+1</a>
+    |
+    <a href="{% url 'increment_by' 2 %}">+2</a>
+    |
+    <a href="{% url 'destroy_session' %}">Reset Session</a>
+  </p>
+
+  <hr>
+
+  <h2>Custom Increment</h2>
+
+  <form method="POST" action="{% url 'custom_increment' %}">
+    {% csrf_token %}
+    <input type="number" name="amount" placeholder="Enter number" required />
+    <button type="submit">Apply</button>
+  </form>
+ </div>
+
+</body>
+</html>
