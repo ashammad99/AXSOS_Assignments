@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Books</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="title" placeholder="Book title">
+    <button type="submit">Add</button>
+</form>
+
+<hr>
+
+{% for book in books %}
+    <div class="card">
+        <a href="{% url 'book_detail' book.id %}">
+            <h3>{{ book.title }}</h3>
+        </a>
+    </div>
+{% empty %}
+    <p>No books found</p>
+{% endfor %}
+
+{% endblock %}

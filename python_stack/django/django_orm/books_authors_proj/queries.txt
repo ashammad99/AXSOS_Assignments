@@ -1,0 +1,101 @@
+from books_authors_app.models import Book, Author
+
+Query 1: Create 5 books with the following names: C Sharp, Java, Python, PHP, Ruby
+--------------------------------------------------------------------------------
+Book.objects.create(title='C Sharp', desc='C# programming language')
+Book.objects.create(title='Java', desc='Java programming language')
+Book.objects.create(title='Python', desc='Python programming language')
+Book.objects.create(title='PHP', desc='PHP programming language')
+Book.objects.create(title='Ruby', desc='Ruby programming language')
+Result: 5 books created
+
+Query 2: Create 5 different authors: Jane Austen, Emily Dickinson, Fyodor Dostoevsky, William Shakespeare, Lau Tzu
+--------------------------------------------------------------------------------
+Author.objects.create(first_name='Jane', last_name='Austen')
+Author.objects.create(first_name='Emily', last_name='Dickinson')
+Author.objects.create(first_name='Fyodor', last_name='Dostoevsky')
+Author.objects.create(first_name='William', last_name='Shakespeare')
+Author.objects.create(first_name='Lau', last_name='Tzu')
+Result: 5 authors created
+
+Query 3: Change the name of the C Sharp book to C#
+--------------------------------------------------------------------------------
+book = Book.objects.get(title='C Sharp')
+book.title = 'C#'
+book.save()
+Result: Book name changed to 'C#'
+
+Query 4: Change the first name of the 4th author to Bill
+--------------------------------------------------------------------------------
+author = Author.objects.get(id=4)
+author.first_name = 'Bill'
+author.save()
+Result: 4th author's first name changed to 'Bill'
+
+Query 5: Assign the first author to the first 2 books
+--------------------------------------------------------------------------------
+author1 = Author.objects.get(id=1)
+book1 = Book.objects.get(id=1)
+book2 = Book.objects.get(id=2)
+author1.books.add(book1, book2)
+Result: Author 1 assigned to books 1 and 2
+
+Query 6: Assign the second author to the first 3 books
+--------------------------------------------------------------------------------
+author2 = Author.objects.get(id=2)
+author2.books.add(Book.objects.get(id=1), Book.objects.get(id=2), Book.objects.get(id=3))
+Result: Author 2 assigned to books 1, 2, and 3
+
+Query 7: Assign the third author to the first 4 books
+--------------------------------------------------------------------------------
+author3 = Author.objects.get(id=3)
+author3.books.add(Book.objects.get(id=1), Book.objects.get(id=2), Book.objects.get(id=3), Book.objects.get(id=4))
+Result: Author 3 assigned to books 1, 2, 3, and 4
+
+Query 8: Assign the fourth author to all 5 books
+--------------------------------------------------------------------------------
+author4 = Author.objects.get(id=4)
+author4.books.add(*Book.objects.all())
+Result: Author 4 assigned to all 5 books
+
+Query 9: Retrieve all the authors for the 3rd book
+--------------------------------------------------------------------------------
+book3 = Book.objects.get(id=3)
+authors = book3.authors.all()
+Result: Authors for book 3 (Python):
+  - Emily Dickinson
+  - Fyodor Dostoevsky
+  - Bill Shakespeare
+
+Query 10: Remove the first author of the 3rd book
+--------------------------------------------------------------------------------
+book3 = Book.objects.get(id=3)
+author1 = Author.objects.get(id=1)
+book3.authors.remove(author1)
+Result: Author 1 removed from book 3
+
+Query 11: Add the 5th author as one of the authors of the 2nd book
+--------------------------------------------------------------------------------
+book2 = Book.objects.get(id=2)
+author5 = Author.objects.get(id=5)
+book2.authors.add(author5)
+Result: Author 5 added to book 2
+
+Query 12: Find all the books that the 3rd author is part of
+--------------------------------------------------------------------------------
+author3 = Author.objects.get(id=3)
+books = author3.books.all()
+Result: Books for author 3 (Fyodor Dostoevsky):
+  - C#
+  - Java
+  - Python
+  - PHP
+
+Query 13: Find all the authors that contributed to the 5th book
+--------------------------------------------------------------------------------
+book5 = Book.objects.get(id=5)
+authors = book5.authors.all()
+Result: Authors for book 5 (Ruby):
+  - Bill Shakespeare
+
+

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Authors</h1>
+
+<div class="card">
+
+    <form method="post">
+        {% csrf_token %}
+
+        <input type="text" name="first_name" placeholder="First name">
+        <input type="text" name="last_name" placeholder="Last name">
+        <textarea name="notes" placeholder="Notes"></textarea>
+
+        <button type="submit">Add Author</button>
+    </form>
+
+</div>
+
+<hr>
+
+{% for author in authors %}
+    <div class="card">
+        <a href="{% url 'author_detail' author.id %}">
+            <h3>{{ author.full_name }}</h3>
+        </a>
+    </div>
+{% empty %}
+    <p>No authors</p>
+{% endfor %}
+
+{% endblock %}

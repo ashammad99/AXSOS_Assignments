@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{{ author.full_name }}</h1>
+
+<div class="card">
+    <p>{{ author.notes }}</p>
+</div>
+
+<div class="card">
+
+    <h3>Books</h3>
+
+    {% for book in books %}
+        <p>
+            {{ book.title }}
+
+            <form method="post"
+                  action="{% url 'author_remove_book' author.id book.id %}">
+                {% csrf_token %}
+                <button type="submit">Remove</button>
+            </form>
+        </p>
+    {% empty %}
+        <p>No books</p>
+    {% endfor %}
+
+</div>
+
+<div class="card">
+
+    <h3>Add Book</h3>
+
+    <form method="post">
+        {% csrf_token %}
+        <select name="book_id">
+            {% for book in available_books %}
+                <option value="{{ book.id }}">
+                    {{ book.title }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Add</button>
+    </form>
+
+</div>
+
+<div class="card">
+    <a href="{% url 'author_update' author.id %}">Edit</a>
+
+    <form method="post" action="{% url 'author_delete' author.id %}">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+</div>
+
+{% endblock %}

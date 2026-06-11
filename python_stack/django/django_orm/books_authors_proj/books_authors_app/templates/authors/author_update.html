@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Edit Author</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    <input type="text"
+           name="first_name"
+           value="{{ author.first_name }}">
+
+    <input type="text"
+           name="last_name"
+           value="{{ author.last_name }}">
+
+    <textarea name="notes">{{ author.notes }}</textarea>
+
+    <button type="submit">Save</button>
+</form>
+
+<a href="{% url 'author_detail' author.id %}">Cancel</a>
+{% endblock %}
