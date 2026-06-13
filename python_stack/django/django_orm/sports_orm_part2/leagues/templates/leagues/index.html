@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports ORM Queries</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .queries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .query-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .query-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+
+        .query-card h2 {
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .query-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .result-list {
+            list-style: none;
+        }
+
+        .result-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            color: #333;
+        }
+
+        .result-list li:last-child {
+            border-bottom: none;
+        }
+
+        .result-count {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #667eea;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .no-results {
+            color: #999;
+            font-style: italic;
+            padding: 10px 0;
+        }
+
+        .legend {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .legend h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .legend-item {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .legend-item:last-child {
+            border-bottom: none;
+        }
+
+        .legend-label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .legend-desc {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚽ Sports ORM Query Results</h1>
+
+        <div class="queries-grid">
+            <!-- Query 1: All baseball leagues -->
+            <div class="query-card">
+                <h2><span class="query-number">1</span>All Baseball Leagues</h2>
+                {% if baseball_leagues %}
+                    <ul class="result-list">
+                        {% for league in baseball_leagues %}
+                            <li>{{ league.name }}</li>
+                        {% endfor %}
+                    </ul>
+                    <span class="result-count">{{ baseball_leagues.count }} results</span>
+                {% else %}
+                    <p class="no-results">No results found</p>
+                {% endif %}
+            </div>
+
+            <!-- Query 2: All women's leagues -->
+            <div class="query-card">
+                <h2><span class="query-number">2</span>All Women's Leagues</h2>
+                {% if women_leagues %}
+                    <ul class="result-list">
+                        {% for league in women_leagues %}
+                            <li>{{ league.name }}</li>
+                        {% endfor %}
+                    </ul>
+                    <span class="result-count">{{ women_leagues.count }} results</span>
+                {% else %}
+                    <p class="no-results">No results found</p>
+                {% endif %}
+            </div>
+
+            <!-- Query 3: All leagues where sport is any hockey -->
+            <div class="query-card">
+                <h2><span class="query-number">3</span>All Hockey Leagues</h2>
+                {% if hockey_leagues %}
+                    <ul class="result-list">
+                        {% for league in hockey_leagues %}
+                            <li>{{ league.name }} ({{ league.sport }})</li>
+                        {% endfor %}
+                    </ul>
+                    <span class="result-count">{{ hockey_leagues.count }} results</span>
+                {% else %}
+                    <p class="no-results">No results found</p>
+                {% endif %}
+            </div>
+
+            <!-- Query 4: All leagues where sport is something OTHER THAN football -->
+            <div class="query-card">
+                <h2><span class="query-number">4</span>Not Football Leagues</h2>
+                {% if non_football_leagues %}
+                    <ul class="result-list">
+                        {% for league in non_football_leagues %}
+                            <li>{{ league.name }} ({{ league.sport }})</li>
+                        {% endfor %}
+                    </ul>
+                    <span class="result-count">{{ non_football_leagues.count }} results</span>
+                {% else %}
+                    <p class="no-results">No results found</p>
+                {% endif %}
+            </div>
+
+            <!-- Query 5: All leagues that call themselves "conferences" -->
+            <div class="query-card">
+                <h2><span class="query-number">5</span>Conferences</h2>
+                {% if conferences %}
+                    <ul class="result-list">
+                        {% for league in conferences %}
+                            <li>{{ league.name }}</li>
+                        {% endfor %}
+                    </ul>
+                    <span class="result-count">{{ conferences.count }} results</span>
+                {% else %}
+                    <p class="no-results">No results found</p>
+                {% endif %}
+            </div>
+
+            <!-- Query 6: All leagues in the Atlantic region -->
+            <div class="query-card">
+                <h2><span class="query-number">6</span>Atlantic Region Leagues</h2>
+                {% if atlantic_leagues %}
+                    <ul class="result-list">
+                        {% for league in atlantic_leagues %}
+                            <li>{{ league.name }}</li>
+                        {% endfor %}
+                    </ul>
+                    <span class="result-count">{{ atlantic_leagues.count }} results</span>
+                {% else %}
+                    <p class="no-results">No results found</p>
+                {% endif %}
+            </div>
+
+            <!-- Query 7: All teams based in Dallas -->
+            <div class="query-card">
+                <h2><span class="query-number">7</span>Dallas Teams</h2>
+                {% if dallas_teams %}
+                    <ul class="result-list">
+                        {% for team in dallas_teams %}
+                            <li>{{ team.team_name }}</li>
+                        {% endfor %}
+                    </ul>
+                    <span class="result-count">{{ dallas_teams.count }} results</span>
+                {% else %}
+                    <p class="no-results">No results found</p>
+                {% endif %}
+            </div>
+
+            <!-- Query 8: All teams named the Raptors -->
+            <div class="query-card">
+                <h2><span class="query-number">8</span>Raptors Teams</h2>
+                {% if raptors_teams %}
+                    <ul class="result-list">
+                        {% for team in raptors_teams %}
+                            <li>{{ team.team_name }} ({{ team.location }})</li>
+                        {% endfor %}
+                    </ul>
+                    <span class="result-count">{{ raptors_teams.count }} results</span>
+                {% else %}
+                    <p class="no-results">No results found</p>
+                {% endif %}
+            </div>
+
+            <!-- Query 9: All teams whose location includes "City" -->
+            <div class="query-card">
+                <h2><span class="query-number">9</span>Teams with "City" in Location</h2>
+                {% if city_teams %}
+                    <ul class="result-list">
+                        {% for team in city_teams %}
+                            <li>{{ team.team_name }} ({{ team.location }})</li>
+                        {% endfor %}
+                    </ul>
+                    <span class="result-count">{{ city_teams.count }} results</span>
+                {% else %}
+                    <p class="no-results">No results found</p>
+                {% endif %}
+            </div>
+
+            <!-- Query 10: All teams whose names begin with "T" -->
+            <div class="query-card">
+                <h2><span class="query-number">10</span>Teams Starting with "T"</h2>
+                {% if teams_start_with_t %}
+                    <ul class="result-list">
+                        {% for team in teams_start_with_t %}
+                            <li>{{ team.team_name }}</li>
+                        {% endfor %}
+                    </ul>
+                    <span class="result-count">{{ teams_start_with_t.count }} results</span>
+                {% else %}
+                    <p class="no-results">No results found</p>
+                {% endif %}
+            </div>
+
+            <!-- Query 11: All teams, ordered alphabetically by location -->
+            <div class="query-card">
+                <h2><span class="query-number">11</span>Teams Ordered by Location (A-Z)</h2>
+                {% if teams_by_location %}
+                    <ul class="result-list">
+                        {% for team in teams_by_location %}
+                            <li>{{ team.team_name }} - {{ team.location }}</li>
+                        {% endfor %}
+                    </ul>
+                    <span class="result-count">{{ teams_by_location.count }} results</span>
+                {% else %}
+                    <p class="no-results">No results found</p>
+                {% endif %}
+            </div>
+
+            <!-- Query 12: All teams, ordered by team name in reverse alphabetical order -->
+            <div class="query-card">
+                <h2><span class="query-number">12</span>Teams Ordered by Name (Z-A)</h2>
+                {% if teams_reverse_name %}
+                    <ul class="result-list">
+                        {% for team in teams_reverse_name %}
+                            <li>{{ team.team_name }}</li>
+                        {% endfor %}
+                    </ul>
+                    <span class="result-count">{{ teams_reverse_name.count }} results</span>
+                {% else %}
+                    <p class="no-results">No results found</p>
+                {% endif %}
+            </div>
+
+            <!-- Query 13: Every player with the last name "Cooper" -->
+            <div class="query-card">
+                <h2><span class="query-number">13</span>Players with Last Name "Cooper"</h2>
+                {% if cooper_last_name %}
+                    <ul class="result-list">
+                        {% for player in cooper_last_name %}
+                            <li>{{ player.first_name }} {{ player.last_name }}</li>
+                        {% endfor %}
+                    </ul>
+                    <span class="result-count">{{ cooper_last_name.count }} results</span>
+                {% else %}
+                    <p class="no-results">No results found</p>
+                {% endif %}
+            </div>
+
+            <!-- Query 14: Every player with the first name "Joshua" -->
+            <div class="query-card">
+                <h2><span class="query-number">14</span>Players with First Name "Joshua"</h2>
+                {% if joshua_first_name %}
+                    <ul class="result-list">
+                        {% for player in joshua_first_name %}
+                            <li>{{ player.first_name }} {{ player.last_name }}</li>
+                        {% endfor %}
+                    </ul>
+                    <span class="result-count">{{ joshua_first_name.count }} results</span>
+                {% else %}
+                    <p class="no-results">No results found</p>
+                {% endif %}
+            </div>
+
+            <!-- Query 15: Every player with the last name "Cooper" EXCEPT those with "Joshua" as first name -->
+            <div class="query-card">
+                <h2><span class="query-number">15</span>Cooper (Not Joshua)</h2>
+                {% if cooper_not_joshua %}
+                    <ul class="result-list">
+                        {% for player in cooper_not_joshua %}
+                            <li>{{ player.first_name }} {{ player.last_name }}</li>
+                        {% endfor %}
+                    </ul>
+                    <span class="result-count">{{ cooper_not_joshua.count }} results</span>
+                {% else %}
+                    <p class="no-results">No results found</p>
+                {% endif %}
+            </div>
+
+            <!-- Query 16: All players with first name "Alexander" OR first name "Wyatt" -->
+            <div class="query-card">
+                <h2><span class="query-number">16</span>Alexander or Wyatt</h2>
+                {% if alexander_or_wyatt %}
+                    <ul class="result-list">
+                        {% for player in alexander_or_wyatt %}
+                            <li>{{ player.first_name }} {{ player.last_name }}</li>
+                        {% endfor %}
+                    </ul>
+                    <span class="result-count">{{ alexander_or_wyatt.count }} results</span>
+                {% else %}
+                    <p class="no-results">No results found</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Legend explaining ORM methods used -->
+        <div class="legend">
+            <h3>📚 ORM Methods Used</h3>
+            <div class="legend-item">
+                <span class="legend-label">filter()</span>
+                <span class="legend-desc">Get records that match criteria</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-label">exclude()</span>
+                <span class="legend-desc">Get records that DON'T match criteria</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-label">__icontains</span>
+                <span class="legend-desc">Case-insensitive substring match</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-label">__istartswith</span>
+                <span class="legend-desc">Case-insensitive starts with</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-label">order_by()</span>
+                <span class="legend-desc">Sort results (use - for reverse)</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-label">Q objects</span>
+                <span class="legend-desc">Combine conditions with | (OR) or & (AND)</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
