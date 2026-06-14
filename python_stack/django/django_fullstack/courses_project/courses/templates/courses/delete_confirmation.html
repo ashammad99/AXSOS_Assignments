@@ -1,0 +1,23 @@
+{% extends 'courses/base.html' %}
+
+{% block title %}Delete a course{% endblock %}
+
+{% block content %}
+<div class="header">
+    <h2>Are you sure you want to delete the following course?</h2>
+</div>
+
+<div class="confirmation-box">
+    <p>
+        <strong>Name:</strong> {{ course.name }}
+    </p>
+    <p>
+        <strong>Description:</strong> {{ course.description.text }}
+    </p>
+</div>
+
+<div class="button-group">
+    <a href="{% url 'courses:index' %}" class="btn btn-secondary">No</a>
+    <a href="{% url 'courses:delete_course' course.id %}" class="btn btn-danger">Yes! I want to delete this</a>
+</div>
+{% endblock %}
