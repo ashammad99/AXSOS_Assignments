@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; padding: 40px 20px; }
+        .container-main { background-color: white; padding: 40px; border-radius: 8px; max-width: 1000px; }
+        h2 { margin-bottom: 30px; color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
+        .form-group { margin-bottom: 20px; }
+        label { font-weight: 500; margin-bottom: 5px; }
+        .error-message { color: #dc3545; font-size: 0.9em; margin-top: 5px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .btn-submit { width: 100%; padding: 10px; font-weight: 600; }
+        .email-status { font-size: 0.85em; margin-top: 5px; }
+        .available { color: #28a745; }
+        .taken { color: #dc3545; }
+        .alert { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container-main">
+        <h1 class="text-center mb-4">Login & Registration</h1>
+
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+        {% endif %}
+
+        <div class="form-row">
+            <!-- REGISTRATION FORM -->
+            <div>
+                <h2>Registration</h2>
+                <form method="POST" action="{% url 'register' %}" id="registerForm" novalidate>
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input type="text" class="form-control" id="first_name" name="first_name"
+                               value="{{ old_data.first_name }}" placeholder="John">
+                        {% if errors.first_name %}
+                        <div class="error-message">{{ errors.first_name }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name"
+                               value="{{ old_data.last_name }}" placeholder="Doe">
+                        {% if errors.last_name %}
+                        <div class="error-message">{{ errors.last_name }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg_email">Email</label>
+                        <input type="email" class="form-control" id="reg_email" name="email"
+                               value="{{ old_data.email }}" placeholder="john@example.com">
+                        {% if errors.email %}
+                        <div class="error-message">{{ errors.email }}</div>
+                        {% endif %}
+                        <div id="emailStatus" class="email-status"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthday">Birthday</label>
+                        <input type="date" class="form-control" id="birthday" name="birthday"
+                               value="{{ old_data.birthday }}">
+                        {% if errors.birthday %}
+                        <div class="error-message">{{ errors.birthday }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password"
+                               placeholder="At least 8 characters">
+                        {% if errors.password %}
+                        <div class="error-message">{{ errors.password }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm_pw">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirm_pw" name="confirm_pw">
+                        {% if errors.confirm_pw %}
+                        <div class="error-message">{{ errors.confirm_pw }}</div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-submit">Register</button>
+                </form>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <div>
+                <h2>Login</h2>
+                <form method="POST" action="{% url 'login' %}" id="loginForm" novalidate>
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="login_email">Email</label>
+                        <input type="email" class="form-control" id="login_email" name="email"
+                               value="{{ login_data.email }}" placeholder="john@example.com">
+                        {% if login_errors.email %}
+                        <div class="error-message">{{ login_errors.email }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login_password">Password</label>
+                        <input type="password" class="form-control" id="login_password" name="password"
+                               placeholder="Your password">
+                        {% if login_errors.password %}
+                        <div class="error-message">{{ login_errors.password }}</div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-submit">Log In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const emailInput = document.getElementById('reg_email');
+        const emailStatus = document.getElementById('emailStatus');
+        const registerForm = document.getElementById('registerForm');
+
+        emailInput.addEventListener('blur', async function() {
+            const email = this.value.trim();
+            if (!email) {
+                emailStatus.textContent = '';
+                return;
+            }
+
+            try {
+                const response = await fetch('{% url "check_email" %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    },
+                    body: JSON.stringify({ email: email })
+                });
+
+                const data = await response.json();
+
+                if (data.available) {
+                    emailStatus.textContent = '✓ ' + data.message;
+                    emailStatus.className = 'email-status available';
+                } else {
+                    emailStatus.textContent = '✗ ' + data.message;
+                    emailStatus.className = 'email-status taken';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+
+        registerForm.addEventListener('submit', function(e) {
+            const errors = [];
+
+            const firstName = document.getElementById('first_name').value.trim();
+            if (!firstName) errors.push('First name is required');
+            else if (firstName.length < 2) errors.push('First name must be at least 2 characters');
+            else if (!/^[a-zA-Z]+$/.test(firstName)) errors.push('First name should only contain letters');
+
+            const lastName = document.getElementById('last_name').value.trim();
+            if (!lastName) errors.push('Last name is required');
+            else if (lastName.length < 2) errors.push('Last name must be at least 2 characters');
+            else if (!/^[a-zA-Z]+$/.test(lastName)) errors.push('Last name should only contain letters');
+
+            const email = document.getElementById('reg_email').value.trim();
+            if (!email) errors.push('Email is required');
+            else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push('Invalid email format');
+
+            const password = document.getElementById('password').value;
+            if (!password) errors.push('Password is required');
+            else if (password.length < 8) errors.push('Password must be at least 8 characters');
+
+            const confirmPw = document.getElementById('confirm_pw').value;
+            if (!confirmPw) errors.push('Please confirm your password');
+            else if (password !== confirmPw) errors.push('Passwords do not match');
+
+            const birthday = document.getElementById('birthday').value;
+            if (birthday) {
+                const bday = new Date(birthday);
+                const today = new Date();
+                if (bday >= today) errors.push('Birthday must be in the past');
+
+                let age = today.getFullYear() - bday.getFullYear();
+                if ((today.getMonth(), today.getDate()) < (bday.getMonth(), bday.getDate())) age--;
+                if (age < 13) errors.push('You must be at least 13 years old');
+            }
+
+            if (errors.length > 0) {
+                e.preventDefault();
+                alert('Please fix the following errors:\n\n' + errors.join('\n'));
+            }
+        });
+    </script>
+</body>
+</html>
